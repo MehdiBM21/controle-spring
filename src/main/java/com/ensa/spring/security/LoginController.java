@@ -9,7 +9,7 @@ public class LoginController {
 
     @GetMapping("/user")
     public String index() {
-        return "listStudent";
+        return "listEmploye";
     }
     @GetMapping("/customLogin")
     public String login() {

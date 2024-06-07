@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des employés</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+
+</head>
+<body>
+<div class="container my-2" align="center">
+
+    <h1>Gestion des employés</h1>
+
+    <!-- Formulaire pour ajouter un utilisateur -->
+    <h2>Ajouter un employé</h2>
+    <form th:action="@{/employes/new}" method="post">
+        <div class="form-group">
+            <label for="firstName">Name:</label>
+            <input type="text" class="form-control" id="firstName" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="lastName">Email:</label>
+            <input type="email" class="form-control" id="lastName" name="email" required>
+        </div>
+
+<!--        <div class="form-group">-->
+<!--            <label for="skills">Skills:</label>-->
+<!--            <select multiple class="form-control" id="skills" name="skills">-->
+<!--                <option value="java">Java</option>-->
+<!--                <option value=".net">.NET</option>-->
+<!--                <option value="nodeJs">NodeJs</option>-->
+<!--                <option value="Spring">Spring</option>-->
+<!--                <option value="Angular">Angular</option>-->
+<!--                <option value="Spring Boot">Spring Boot</option>-->
+<!--            </select>-->
+<!--        </div>-->
+        <div class="form-group">
+            <label for="skills">Skills:</label>
+            <select multiple class="form-control" id="skills" name="skills">
+                <option th:each="skill : ${skills}" th:value="${skill.id}" th:text="${skill.name}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="post">Post:</label>
+            <select class="form-control" id="post">
+                <option value="MANAGER">MANAGER</option>
+                <option value="DEV">DEV</option>
+                <option value="DEVOPS">DEVOPS</option>
+                <option value="TECH LEAD">TECH LEAD</option>
+            </select>
+        </div>
+
+<!--        <div class="form-group">-->
+<!--            <label for="teachers">Enseignants:</label>-->
+<!--            <select multiple class="form-control" id="teachers" name="teacherIds">-->
+<!--                <th:block th:each="teacher : ${teachers}">-->
+<!--                    <option th:value="${teacher.id}" th:text="${teacher.name}"></option>-->
+<!--                </th:block>-->
+<!--            </select>-->
+<!--        </div>-->
+
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+    </form>
+
+</div>
+
+</body>
+</html>

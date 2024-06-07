@@ -15,7 +15,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
         // Redirect the user to the desired route
-        response.sendRedirect("/front/students/all");
+        response.sendRedirect("/employes/all");
     }
 }
 
