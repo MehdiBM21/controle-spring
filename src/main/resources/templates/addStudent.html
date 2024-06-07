@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des étudiants</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+
+</head>
+<body>
+<div class="container my-2" align="center">
+
+    <h1>Gestion des étudiants</h1>
+
+    <!-- Formulaire pour ajouter un utilisateur -->
+    <h2>Ajouter un utilisateur</h2>
+    <form th:action="@{/front/students/addStudent}" method="post">
+        <div class="form-group">
+            <label for="firstName">Prénom:</label>
+            <input type="text" class="form-control" id="firstName" name="firstName">
+        </div>
+        <div class="form-group">
+            <label for="lastName">Nom:</label>
+            <input type="text" class="form-control" id="lastName" name="lastName">
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" name="email">
+        </div>
+        <div class="form-group">
+            <label for="password">Mot de passe:</label>
+            <input type="password" class="form-control" id="password" name="password">
+        </div>
+
+        <div class="form-group">
+            <label for="teachers">Enseignants:</label>
+            <select multiple class="form-control" id="teachers" name="teacherIds">
+                <th:block th:each="teacher : ${teachers}">
+                    <option th:value="${teacher.id}" th:text="${teacher.name}"></option>
+                </th:block>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+    </form>
+
+    <!-- Formulaire pour ajouter des notes pour chaque cours -->
+    <h2>Ajouter des notes pour chaque cours</h2>
+    <form action="/addNotes" method="post">
+        <!-- Boucle sur la liste des étudiants -->
+        <th:block th:each="student : ${students}">
+            <h3>Étudiant: <span th:text="${student.firstName + ' ' + student.lastName}"></span></h3>
+            <!-- Boucle sur la liste des cours -->
+            <th:block th:each="course : ${student.courses}">
+                <div class="form-group">
+                    <label for="note_"><span th:text="${course.title}"></span>:</label>
+                    <input type="number" class="form-control" id="note_" name="note_" min="0" max="20" step="0.1">
+                    <input type="hidden" name="studentId" th:value="${student.id}">
+                    <input type="hidden" name="courseId" th:value="${course.id}">
+                </div>
+            </th:block>
+        </th:block>
+        <button type="submit" class="btn btn-primary">Ajouter les notes</button>
+    </form>
+</div>
+
+</body>
+</html>
